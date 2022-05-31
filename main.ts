@@ -34,6 +34,6 @@ basic.forever(function () {
         serial.writeNumber(hum2)
         serial.writeString(",")
         serial.writeNumber(air)
-        serial.writeLine("")
+        serial.writeLine(",")
     }
 })
