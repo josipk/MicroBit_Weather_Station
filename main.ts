@@ -5,6 +5,7 @@ let t1_error = 0
 let t1 = 0
 let temp2 = 0
 let hum2 = 0
+let air = 0
 loops.everyInterval(1000, function () {
     dht11_dht22.queryData(
     DHTtype.DHT11,
@@ -18,6 +19,9 @@ loops.everyInterval(1000, function () {
         hum2 = dht11_dht22.readData(dataType.humidity)
     }
 })
+loops.everyInterval(1000, function () {
+    air = pins.analogReadPin(AnalogPin.P1)
+})
 basic.forever(function () {
     t1_error = 0
     t1 = dstemp.celsius(DigitalPin.P16)
@@ -26,7 +30,10 @@ basic.forever(function () {
         serial.writeNumber(t1)
         serial.writeString(",")
         serial.writeNumber(temp2)
-        serial.writeString(",60")
+        serial.writeString(",")
+        serial.writeNumber(hum2)
+        serial.writeString(",")
+        serial.writeNumber(air)
         serial.writeLine("")
     }
 })
