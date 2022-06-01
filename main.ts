@@ -25,8 +25,10 @@ loops.everyInterval(1000, function () {
     air = pins.analogReadPin(AnalogPin.P1)
 })
 loops.everyInterval(2000, function () {
-    radio.sendValue("temp", t1)
-    basic.pause(100)
+    if (t1_error == 0) {
+        radio.sendValue("temp", t1)
+        basic.pause(100)
+    }
     radio.sendValue("air", air)
 })
 basic.forever(function () {
