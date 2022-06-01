@@ -6,6 +6,8 @@ let t1 = 0
 let temp2 = 0
 let hum2 = 0
 let air = 0
+radio.setGroup(1)
+radio.setTransmitPower(4)
 loops.everyInterval(1000, function () {
     dht11_dht22.queryData(
     DHTtype.DHT11,
@@ -18,6 +20,13 @@ loops.everyInterval(1000, function () {
         temp2 = dht11_dht22.readData(dataType.temperature)
         hum2 = dht11_dht22.readData(dataType.humidity)
     }
+})
+loops.everyInterval(1000, function () {
+    radio.sendString("0,")
+    radio.sendNumber(t1)
+    radio.sendString(",")
+    radio.sendNumber(air)
+    radio.sendString("|")
 })
 loops.everyInterval(1000, function () {
     air = pins.analogReadPin(AnalogPin.P1)
