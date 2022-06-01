@@ -6,7 +6,7 @@ let t1 = 0
 let temp2 = 0
 let hum2 = 0
 let air = 0
-radio.setGroup(1)
+radio.setGroup(15)
 radio.setTransmitPower(4)
 loops.everyInterval(1000, function () {
     dht11_dht22.queryData(
@@ -22,14 +22,12 @@ loops.everyInterval(1000, function () {
     }
 })
 loops.everyInterval(1000, function () {
-    radio.sendString("0,")
-    radio.sendNumber(t1)
-    radio.sendString(",")
-    radio.sendNumber(air)
-    radio.sendString("|")
-})
-loops.everyInterval(1000, function () {
     air = pins.analogReadPin(AnalogPin.P1)
+})
+loops.everyInterval(2000, function () {
+    radio.sendValue("temp", t1)
+    basic.pause(100)
+    radio.sendValue("air", air)
 })
 basic.forever(function () {
     t1_error = 0
