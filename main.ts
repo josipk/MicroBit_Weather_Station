@@ -1,5 +1,6 @@
 dstemp.sensorError(function (errorMessage, errorCode, port) {
     t1_error = 1
+    basic.showNumber(errorCode)
 })
 let t1_error = 0
 let t1 = 0
