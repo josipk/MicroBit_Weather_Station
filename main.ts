@@ -13,8 +13,11 @@ loops.everyInterval(600, function () {
 basic.forever(function () {
     t1_error = 0
     t1 = dstemp.celsius(DigitalPin.P16)
-    if (t1_error == 0) {
-        t1 = 0
+    if (t1_error == 1) {
+        t1 = -99
+    }
+    if (convertToText(t1) == "-Infinity") {
+        t1 = -99
     }
     serial.writeString("0,")
     serial.writeNumber(t1)
